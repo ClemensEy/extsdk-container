@@ -1,6 +1,7 @@
 FROM crops/extsdk-container
 
 USER root
+ENV TERM xterm-256color
 COPY esdk-neubau-entry.py \
      usersetup-neubau.py \
      /usr/bin/
@@ -8,11 +9,13 @@ RUN chmod 755 /usr/bin/esdk-neubau-entry.py && \
     chmod 755 /usr/bin/usersetup-neubau.py && \
     useradd -ms /bin/bash sdkuser && \
     apt-get install -y vim && \
-    ["apt-get", "update"] && \
-    ["apt-get", "install", "-y", "zsh"] && \
-    wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
+    apt-get install -y x11-apps
+#    ["apt-get", "update"] && \
+RUN ["apt-get", "install", "-y", "zsh"]
+#RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
 
-#USER sdkuser
+USER sdkuser
+RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
 #WORKDIR /home/sdkuser
 
 USER usersetup
