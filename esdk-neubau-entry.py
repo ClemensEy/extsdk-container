@@ -42,7 +42,9 @@ else:
 
 cmd = """usersetup-neubau.py --username=sdkuser --workdir={} esdk-launch.py {} """\
       """--workdir={}"""
-print cmd
+print "Starting Neubau SDK"
+print "xxxxxxxxxxxxxxxxxxxx"
+os.chmod("/home/sdkuser/.ssh/id_rsa", 0600)
 cmd = cmd.format(args.workdir, urlarg, args.workdir).split()
 
 os.execvp(cmd[0], cmd)
