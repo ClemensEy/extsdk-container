@@ -16,10 +16,10 @@ socat TCP-LISTEN:6000,reuseaddr,fork UNIX-CLIENT:\"$DISPLAY\" &
 myip=$(ifconfig | grep "inet " | grep -Fv 127.0.0.1 | grep -Fv 127.0.0.2 | awk '{print $2}')
 
 
-#run docker with our without url
+#run docker with our without url (http://server.neubau.io:50080/sdk-installer.sh)
 if [[ -n "$url" ]]; then
-  docker run --rm -it --name neubau-sdk --hostname neubau.sdk -v myvolume:/workdir -v /Users/clemens/Developer/keys:/home/sdkuser/.ssh/ -e DISPLAY=$myip:0 clemensey/extsdk-container --url $url
+  docker run --rm -it --name neubau-sdk --hostname neubau.sdk -v myvolume:/workdir -v /Users/clemens/Developer/keys:/home/sdkuser/.ssh/ -v /Users/clemens/Developer/Projects:/workdir/Projects -e DISPLAY=$myip:0 clemensey/extsdk-container --url $url
 else
-  docker run --rm -it --name neubau-sdk --hostname neubau.sdk -v myvolume:/workdir -v /Users/clemens/Developer/keys:/home/sdkuser/.ssh/ -e DISPLAY=$myip:0 clemensey/extsdk-container
+  docker run --rm -it --name neubau-sdk --hostname neubau.sdk -v myvolume:/workdir -v /Users/clemens/Developer/keys:/home/sdkuser/.ssh/ -v /Users/clemens/Developer/Projects:/workdir/Projects -e DISPLAY=$myip:0 clemensey/extsdk-container
 
 fi
