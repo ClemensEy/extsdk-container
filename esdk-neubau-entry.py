@@ -45,6 +45,7 @@ cmd = """usersetup-neubau.py --username=sdkuser --workdir={} esdk-launch.py {} "
 print "Starting Neubau SDK"
 print "xxxxxxxxxxxxxxxxxxxx"
 os.chmod("/home/sdkuser/.ssh/id_rsa", 0600)
+os.environ['BB_ENV_EXTRAWHITE'] = 'DISPLAY'
 cmd = cmd.format(args.workdir, urlarg, args.workdir).split()
 
 os.execvp(cmd[0], cmd)
