@@ -74,5 +74,6 @@ cmd = "sudo -E -H -u {} ".format(args.username)
 
 #print cmd
 #print usercmd
+#os.environ['BB_ENV_EXTRAWHITE'] = 'DISPLAY'
 cmd = (cmd + usercmd).split()
 os.execvp(cmd[0], cmd)

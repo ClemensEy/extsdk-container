@@ -3,6 +3,7 @@ FROM crops/extsdk-container
 USER root
 ENV TERM xterm-256color
 COPY esdk-neubau-entry.py \
+     esdk-neubau-launch.py \
      usersetup-neubau.py \
      /usr/bin/
 RUN chmod 755 /usr/bin/esdk-neubau-entry.py && \

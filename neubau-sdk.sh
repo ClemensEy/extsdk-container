@@ -11,7 +11,7 @@ echo "Neubau sdk-script..."
 sambarun=$(docker inspect -f {{.State.Running}} samba)
 #echo $sambarun
 
-if [[$sambarun]]; then
+if [ "$sambarun" = true ]; then
   echo "samba container is running"
 else
   echo "starting samba container"
