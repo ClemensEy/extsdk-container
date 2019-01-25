@@ -10,8 +10,8 @@ RUN chmod 755 /usr/bin/esdk-neubau-entry.py && \
     chmod 755 /usr/bin/usersetup-neubau.py && \
     useradd -ms /bin/bash sdkuser && \
     apt-get install -y vim && \
-    apt-get install -y x11-apps \
-    apt install -y openssh-server
+    apt-get install -y x11-apps && \
+    apt-get update && apt-get install -y openssh-server
 #    ["apt-get", "update"] && \
 RUN ["apt-get", "install", "-y", "zsh"]
 #RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
