@@ -9,8 +9,8 @@ COPY esdk-neubau-entry.py \
 RUN chmod 755 /usr/bin/esdk-neubau-entry.py && \
     chmod 755 /usr/bin/usersetup-neubau.py && \
     useradd -ms /bin/bash sdkuser && \
-    echo "sdkuser:sdkuser" | chpasswd \
-    adduser sdkuser sudo \
+    echo "sdkuser:sdkuser" | chpasswd && \
+    adduser sdkuser sudo && \
     apt-get install -y vim && \
     apt-get install -y x11-apps
 #    ["apt-get", "update"] && \
