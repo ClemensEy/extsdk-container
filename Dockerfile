@@ -11,10 +11,23 @@ RUN chmod 755 /usr/bin/esdk-neubau-entry.py && \
     useradd -ms /bin/bash sdkuser && \
     apt-get install -y vim && \
     apt-get install -y x11-apps \
-    sudo apt install -y openssh-server
+    apt install -y openssh-server
 #    ["apt-get", "update"] && \
 RUN ["apt-get", "install", "-y", "zsh"]
 #RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
+
+RUN mkdir /var/run/sshd
+RUN echo 'root:screencast' | chpasswd
+RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+
+# SSH login fix. Otherwise user is kicked off after login
+RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
+
+ENV NOTVISIBLE "in users profile"
+RUN echo "export VISIBLE=now" >> /etc/profile
+
+EXPOSE 22
+CMD ["/usr/sbin/sshd", "-D"]
 
 USER sdkuser
 RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
