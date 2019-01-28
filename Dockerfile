@@ -27,6 +27,8 @@ ENV NOTVISIBLE "in users profile"
 RUN echo "export VISIBLE=now" >> /etc/profile
 
 EXPOSE 22
+RUN echo "sdkuser ALL=NOPASSWD: /usr/sbin/sshd" >> /etc/sudoers
+RUN echo "sdkuser ALL=NOPASSWD: /etc/init.d/ssh start" >> /etc/sudoers
 
 USER sdkuser
 RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
@@ -35,4 +37,4 @@ RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -
 USER usersetup
 ENV LANG=en_US.UTF-8
 #RUN ssh-keyscan -t rsa gitlab.neubau.io >> ~/.ssh/known_hosts
-ENTRYPOINT ["/usr/bin/dumb-init", "--", "/usr/bin/esdk-neubau-entry.py"]
+ENTRYPOINT ["/usr/bin/dumb-init", "--", "service ssh start && /usr/bin/esdk-neubau-entry.py"]
