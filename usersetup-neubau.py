@@ -60,6 +60,7 @@ if not args.gid:
     st = os.stat(args.workdir)
     args.gid = st.st_gid
 
+
 cmd = "sudo restrict_groupadd.sh {} {}".format(args.gid, args.username)
 #subprocess.check_call(cmd.split(), stdout=sys.stdout, stderr=sys.stderr)
 
@@ -72,8 +73,8 @@ usercmd = "{} {}".format(args.cmd, " ".join(args.args))
 cmd = "sudo -E -H -u {} ".format(args.username)
 #copy2("/workdir/bla.txt", "/home/sdkuser/")
 
-#print cmd
-#print usercmd
+
 #os.environ['BB_ENV_EXTRAWHITE'] = 'DISPLAY'
 cmd = (cmd + usercmd).split()
+
 os.execvp(cmd[0], cmd)

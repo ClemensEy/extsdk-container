@@ -26,6 +26,7 @@ import shutil
 import stat
 
 
+
 class EsdkLaunchError(Exception):
     pass
 
@@ -60,7 +61,11 @@ parser.add_argument("--workdir", default='/workdir',
 
 args = parser.parse_args()
 
+
+
 try:
+
+
     if not os.path.exists(args.workdir):
         os.mkdir(args.workdir)
 
@@ -111,6 +116,9 @@ try:
         except NameError:
             pass
 
+
+    # get enviroment Variables from evv setup script to cmake file
+    os.system('/home/sdkuser/createEnvCmake.py')
     # Source the environment setup script and run bash
     cmd = 'bash -c'.split()
     args = 'cd {}; . {}; exec bash -i'.format(args.workdir, setupscript[0])

@@ -40,13 +40,24 @@ if args.url:
 else:
     urlarg = ""
 
-cmd = """usersetup-neubau.py --username=sdkuser --workdir={} esdk-launch.py {} """\
+#cmd = """usersetup-neubau.py --username=sdkuser --workdir={} esdk-launch.py {} """\
+#      """--workdir={}"""
+cmd = """usersetup-neubau.py --username=sdkuser --workdir={} esdk-neubau-launch.py {} """\
       """--workdir={}"""
 print "Starting embedded SDK"
-print "Yxxxxxxxxxxxxxxxxxxx"
+print "xxxxxxxxxxxxxxxxxxxxx"
 os.chmod("/home/sdkuser/.ssh/id_rsa", 0600)
-#os.system('sudo /etc/init.d/ssh start')
+print "Starting ssh server"
+os.system('sudo /etc/init.d/ssh start')
+print "generating .cmake file with environment variables"
+#TODO Adjust workdir
+#os.chmod("/home/sdkuser/createEnvCmake.py", 0777)
+#os.system('touch /workdir/environment-setup.cmake')
+#os.chmod("/workdir/environment-setup.cmake", 0777)
+
+#os.system('/home/sdkuser/createEnvCmake.py')
 
 cmd = cmd.format(args.workdir, urlarg, args.workdir).split()
+
 os.environ['BB_ENV_EXTRAWHITE'] = 'DISPLAY'
 os.execvp(cmd[0], cmd)
