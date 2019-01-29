@@ -43,9 +43,9 @@ else:
 cmd = """usersetup-neubau.py --username=sdkuser --workdir={} esdk-launch.py {} """\
       """--workdir={}"""
 print "Starting embedded SDK"
-print "xxxxxxxxxxxxxxxxxxx"
+print "Yxxxxxxxxxxxxxxxxxxx"
 os.chmod("/home/sdkuser/.ssh/id_rsa", 0600)
-os.system('sudo /etc/init.d/ssh start')
+#os.system('sudo /etc/init.d/ssh start')
 
 cmd = cmd.format(args.workdir, urlarg, args.workdir).split()
 os.environ['BB_ENV_EXTRAWHITE'] = 'DISPLAY'
