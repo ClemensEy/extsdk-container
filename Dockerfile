@@ -26,9 +26,10 @@ RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so
 ENV NOTVISIBLE "in users profile"
 RUN echo "export VISIBLE=now" >> /etc/profile
 
-EXPOSE 22
 RUN echo "sdkuser ALL=NOPASSWD: /usr/sbin/sshd" >> /etc/sudoers
 RUN echo "sdkuser ALL=NOPASSWD: /etc/init.d/ssh start" >> /etc/sudoers
+EXPOSE 22
+
 
 USER sdkuser
 RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
