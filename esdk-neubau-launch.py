@@ -118,7 +118,9 @@ try:
 
 
     # get enviroment Variables from evv setup script to cmake file
-    os.system('/home/sdkuser/createEnvCmake.py')
+    #os.system('/home/sdkuser/createEnvCmake.py')
+    #replaced with yocto env-script
+
     # Source the environment setup script and run bash
     cmd = 'bash -c'.split()
     args = 'cd {}; . {}; exec bash -i'.format(args.workdir, setupscript[0])
